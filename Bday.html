@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Memory Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Pacifico&display=swap');
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #f5e1da, #cfae9e);
+            font-family: 'Pacifico', cursive;
+            overflow: hidden;
+        }
+        .book-container {
+            position: relative;
+            width: 380px;
+            height: 480px;
+            perspective: 1500px;
+        }
+        .book {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #fff8f0;
+            border-radius: 15px;
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            transition: transform 1s ease-in-out;
+            transform-origin: left center;
+            backface-visibility: hidden;
+        }
+        .cover-page {
+            background: url('cover6.jpg') no-repeat center/cover;
+            font-family: 'Dancing Script', cursive;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            height: 100%;
+            text-align:center;
+            padding: 2px;
+            box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border: 5px solid #8f6c4a;
+            border-radius: 15px;
+        }
+        .page img {
+            max-width: 60%;
+            border-radius: 15px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .page .caption {
+            font-family: 'Dancing Script', cursive;
+            font-size: 22px;
+            color: #7a4e2d;
+            margin-top: 10px;
+        }
+        .page .note {
+            font-size: 16px;
+            color: #6d4c41;
+            background: rgba(255, 235, 205, 0.8);
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 5px;
+        }
+        .buttons {
+            position: absolute;
+            bottom: -60px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            background: #8b5e3c;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Pacifico', cursive;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #a67c52;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="playAudio()">Play Music</button>
+
+    <audio id="background-music" loop>
+        <source src="Perfect.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
+    
+    <script>
+        function playAudio() {
+            document.getElementById("background-music").play();
+        }
+    </script>
+    
+    
+    <div class="book-container">
+        <div class="book" id="book">
+            <div class="page cover-page" style="z-index: 10;"></div>
+            <div class="page" style="z-index: 9;"><img src="memory1.jpg"><div class="caption">Our First Photo</div><div class="note">Our first photo remember? the days we used to sit in your wing before my college, I still remember we both were so shy to click this photo too!</div></div>
+            <div class="page" style="z-index: 8;"><img src="memory2.jpg"0><div class="caption">Cutest Moments</div><div class="note">Ye toh sab hi hota hai when we are together as it has all cute giggles around when we together </div></div>
+            <div class="page" style="z-index: 7;"><img src="memory3.jpg"><div class="caption">Our Dream Success</div><div class="note">One day, we’ll walk hand in hand with all our dreams coming true.</div></div>
+            <div class="page" style="z-index: 6;"><img src="memory4.jpg"><div class="caption">One year</div><div class="note">Our first destination to our journey called "LOVE"</div></div>
+            <div class="page" style="z-index: 5;"><img src="memory5.jpg"><div class="caption">Dedh Saal</div><div class="note">This was my biggest promise to you that I will be always loving you more day by day!.</div></div>
+            <div class="page" style="z-index: 4;"><img src="memory6.jpg"><div class="caption">Two years</div><div class="note">Our second destination to our journey called "LOVE"</div></div>
+            <div class="page" style="z-index: 3;"><img src="memory8.jpg"><div class="caption">Dhai Saal</div><div class="note"></div>Many more years to come becoming stronger and loving day-by-day </div>
+            <div class="page" style="z-index: 2;"><img src="memory7.jpg"><div class="caption">Late Night Talks</div><div class="note"></div>These small messages and late night talks definitely give me butterflies till date.</div>
+            <div class="page" style="z-index: 1;"><img src="memory9.jpg"><div class="caption">Our Forever Promise</div><div class="note"></div>Through every ups and downs, we make a promise tying a knot to stay together forever!</div>
+        </div>
+        <div class="buttons">
+            <button onclick="prevPage()">Previous</button>
+            <button onclick="nextPage()">Next</button>
+        </div>
+    </div>
+    <script>
+        let currentPage = 0;
+        const pages = document.querySelectorAll('.page');
+        
+        function nextPage() {
+            if (currentPage < pages.length - 1) {
+                pages[currentPage].style.transform = 'rotateY(-180deg)';
+                pages[currentPage].style.transition = 'transform 1s ease-in-out';
+                currentPage++;
+            }
+        }
+        
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                pages[currentPage].style.transform = 'rotateY(0deg)';
+                pages[currentPage].style.transition = 'transform 1s ease-in-out';
+            }
+        }
+    </script>
+</body>
+</html>
+
